@@ -77,5 +77,5 @@ c. COSAS QUE LA IA HIZO MAL O QUE TUVE QUE CORREGIR
    - Corrección: leer la foto con File de expo-file-system:
      new File(imagen.uri).arrayBuffer()
 
-3. La IA agregó cosas que no se pedían.
+2. La IA agregó cosas que no se pedían.
    - La IA agregó un estilo de interfaz que no le pedí, así que me tocó corregir ciertos colores.
