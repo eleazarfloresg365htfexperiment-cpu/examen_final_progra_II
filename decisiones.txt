@@ -1,0 +1,81 @@
+DECISIONES DEL PROYECTO
+
+Renta Virtual de Películas
+
+
+a. QUÉ ENTENDÍ DEL PROBLEMA Y QUÉ TABLAS/MODELOS PLANEÉ
+
+
+El problema pide una app móvil en React Native para rentar películas de
+forma virtual, con dos tipos de usuario:
+
+- Usuario normal: inicia sesión o se registra, ve su perfil, ve la lista de
+  películas y puede rentar una. Cada renta guarda fecha de inicio y fin.
+- Administrador: con todas las funciones que tendrá el usuario, pero además puede agregar películas, eliminarlas y ver un
+  informe con todas las rentas.
+
+La base de datos utilizada fue supabase, ya que esta fue de la que aprendimos en este semestre.
+
+Tablas que planeé:
+
+1. perfiles
+   id (el mismo id del usuario en Supabase Auth), nombre_completo, edad,
+   no_tarjeta, foto_url, rol ("usuario" o "administrador").
+
+2. peliculas
+   id, titulo, genero, anio.
+
+3. rentas
+   id, usuario_id (quién rentó), pelicula_id (qué rentó),
+   pelicula_titulo (copia del título, para que el informe no se pierda si
+   el administrador elimina la película), fecha_inicio, fecha_fin.
+
+Además un espacio de archivos (bucket "fotos") para las fotografías: la
+imagen se guarda ahí y en perfiles solo se guarda su dirección.
+
+Regla de negocio en el backend (trigger validar_renta en la base de datos):
+- La renta siempre queda a nombre del usuario que tiene la sesión.
+- Las fechas las pone el servidor: inicia hoy y dura 3 días.
+- No se puede rentar una película que ya se tiene rentada.
+- Máximo 3 rentas activas por usuario.
+
+También hay políticas de seguridad (RLS): solo el administrador puede
+agregar o eliminar películas y ver todas las rentas, y ningún usuario
+puede cambiarse el rol desde la app.
+
+
+b. QUÉ PARTES SE DELEGARON A LA IA Y POR QUÉ
+
+Herramienta: Claude (Anthropic).
+
+Delegué a la IA:
+
+- Escribir el SQL de las tablas, porque la sintaxis de Postgres y RLS es
+  detallada y fácil de equivocar.
+- Trabajar las interfaces gráficas, para no perder tiempo.
+- Arreglar un error en las fotografías de los perfiles, ya que no se mostraban.
+
+Lo que decidí yo:
+- Diseño minimalista de la app.
+- Reglas de negocio de la base de datos.
+- Desactivar la confirmación por correo para que el registro sea directo.
+- Agregar la pantalla "Mis rentas" para que el uso de la app fuera más cómodo.
+- Arreglar las fotografías, ya que no se mostraban en la app por un error de envío de información.
+- Instalar las dependencias, correr la app, probarla en el teléfono y
+  subir el código a GitHub.
+
+
+c. COSAS QUE LA IA HIZO MAL O QUE TUVE QUE CORREGIR
+
+
+1. La fotografía del perfil no se veía.
+   - Qué pasó: al cambiar la fotografía, el círculo quedaba gris.
+   - Cómo me di cuenta: probando la app en el teléfono.
+   - Causa: la IA leyó la foto del teléfono con fetch(imagen.uri). En esta
+     versión de Expo eso no funciona; en Supabase el archivo subido pesaba
+     14 bytes y su contenido era el texto "File not found".
+   - Corrección: leer la foto con File de expo-file-system:
+     new File(imagen.uri).arrayBuffer()
+
+3. La IA agregó cosas que no se pedían.
+   - La IA agregó un estilo de interfaz que no le pedí, así que me tocó corregir ciertos colores.

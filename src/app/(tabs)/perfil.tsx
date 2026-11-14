@@ -1,3 +1,4 @@
+import { File } from 'expo-file-system';
 import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { useEffect, useState } from 'react';
@@ -81,8 +82,9 @@ export default function PerfilUsuario() {
     setSubiendo(true);
     try {
       const imagen = resultado.assets[0];
-      // Lee el archivo del teléfono y lo sube a la carpeta del usuario.
-      const archivo = await fetch(imagen.uri).then((respuesta) => respuesta.arrayBuffer());
+      // Lee los bytes de la foto guardada en el teléfono.
+      const archivo = await new File(imagen.uri).arrayBuffer();
+      // La sube a la carpeta del usuario dentro del bucket "fotos".
       const ruta = `${idUsuario}/${Date.now()}.jpg`;
 
       const subida = await supabase.storage

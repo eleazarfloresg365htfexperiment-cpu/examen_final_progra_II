@@ -1,0 +1,31 @@
+PROMPTS UTILIZADOS
+Proyecto: Renta Virtual de Películas
+Herramienta de IA: Claude (Anthropic)
+Fecha: 14 de noviembre de 2026
+
+Los prompts están en el orden en que se hicieron, tal como se escribieron.
+
+1. "Necesito que me ayudes a crear la interfaz de un proyecto que administra 
+    rentas virtuales de películas".
+
+2. "vamos a usar esta carpeta:
+   C:\Users\FirstCash\Desktop\PRUEBA_PROGRA\prueba-progra-II
+   e instalaremos expo ahí"
+
+3. "usemos supabase"
+
+4. "ok ya estoy dentro, mi org es TechStorm, aún no he creado el proyecto"
+
+5. "listo, haz una interfaz algo simple para este proyecto"
+
+6. "La interfaz se ve algo rara, porque no es un estilo simple"
+
+7. "Se me ocurre que podríamos añadir una pantalla de "mis rentas" para
+    que la app se sienta un poco más cómoda de usar"
+
+8. "Fíjate que la función de cambiar fotografía no me funciona, podrías apoyarme con eso?"
+
+9. "no puedo ver la foto al cambiarla... se ve un fondo gris en el círculo
+    de la foto"
+
+10. "Perfecto, ya está listo y funciona bien"
